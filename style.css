@@ -223,6 +223,13 @@ html,body{
 
 .conditional .text-input{
   width:100%;
+  background:#eef1f5;
+  border:1.5px solid #c3d0dd;
+}
+
+.conditional .text-input:focus{
+  background:var(--white);
+  border-color:var(--blue);
 }
 
 /* Text inputs */
