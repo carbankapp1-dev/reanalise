@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reanálise — Script Mínimo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<!-- PWA -->
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0f2c52">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Reanálise">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="favicon-32x32.png" alt="" class="brand-mark" width="28" height="28">
+      <span class="brand-name">Reanálise</span>
+    </div>
+    <p class="subtitle">Monte o script mínimo de forma rápida e padronizada</p>
+  </header>
+
+  <main class="layout">
+
+    <!-- FORM -->
+    <section class="panel form-panel">
+      <h1 class="panel-title">Script Mínimo</h1>
+
+      <form id="form">
+
+        <div class="field" data-question="Possui contrato no mercado?">
+          <label class="field-label">Possui contrato no mercado?</label>
+          <div class="options" data-name="contrato">
+            <button type="button" class="opt" data-value="Sim">Sim</button>
+            <button type="button" class="opt" data-value="Não">Não</button>
+          </div>
+          <div class="conditional" id="contratoExtra">
+            <input type="text" id="contratoBanco" class="text-input" placeholder="Nome do banco">
+          </div>
+        </div>
+
+        <div class="field" data-question="Será quitado?">
+          <label class="field-label">Será quitado?</label>
+          <div class="options" data-name="quitado">
+            <button type="button" class="opt" data-value="Sim">Sim</button>
+            <button type="button" class="opt" data-value="Não">Não</button>
+            <button type="button" class="opt" data-value="Não possui contrato">Não possui contrato</button>
+          </div>
+        </div>
+
+        <div class="field" data-question="Composição da entrada?">
+          <label class="field-label">Composição da entrada?</label>
+          <div class="options" data-name="entrada">
+            <button type="button" class="opt" data-value="Carro">Carro</button>
+            <button type="button" class="opt" data-value="Carro + Dinheiro">Carro + Dinheiro</button>
+            <button type="button" class="opt" data-value="Dinheiro">Dinheiro</button>
+          </div>
+          <div class="conditional" id="entradaExtra">
+            <input type="text" id="entradaCarroInfo" class="text-input" placeholder="Informações do carro (modelo, ano, etc.)">
+          </div>
+        </div>
+
+        <div class="field" data-question="Composição da renda?">
+          <label class="field-label">Composição da renda?</label>
+          <div class="options" data-name="renda">
+            <button type="button" class="opt" data-value="Holerite">Holerite</button>
+            <button type="button" class="opt" data-value="Holerite + Extrato">Holerite + Extrato</button>
+            <button type="button" class="opt" data-value="Holerite + Outros">Holerite + Outros</button>
+            <button type="button" class="opt" data-value="Extrato Bancário">Extrato Bancário</button>
+            <button type="button" class="opt" data-value="Imposto de Renda">Imposto de Renda</button>
+            <button type="button" class="opt" data-value="Faturamento 12 meses emitido pelo contador">Faturamento 12 meses (contador)</button>
+          </div>
+          <div class="conditional" id="rendaExtra">
+            <input type="text" id="rendaOutrosDesc" class="text-input" placeholder="Descreva o que compõe a renda">
+          </div>
+        </div>
+
+        <div class="field" data-question="Estado Civil?">
+          <label class="field-label">Estado Civil</label>
+          <div class="options" data-name="estadoCivil">
+            <button type="button" class="opt" data-value="Casado(a)">Casado(a)</button>
+            <button type="button" class="opt" data-value="Solteiro(a)">Solteiro(a)</button>
+            <button type="button" class="opt" data-value="Divorciado(a)">Divorciado(a)</button>
+            <button type="button" class="opt" data-value="Amasiado(a)">Amasiado(a)</button>
+          </div>
+          <div class="conditional" id="estadoCivilExtra">
+            <input type="text" id="estadoCivilEsposa" class="text-input" placeholder="Dados da esposa (nome, CPF, etc.)">
+          </div>
+        </div>
+
+        <div class="field" data-question="Declara IR?">
+          <label class="field-label">Declara IR?</label>
+          <div class="options" data-name="declaraIR">
+            <button type="button" class="opt" data-value="Sim">Sim</button>
+            <button type="button" class="opt" data-value="Sim com restituição">Sim com restituição</button>
+            <button type="button" class="opt" data-value="Sim com imposto a pagar">Sim com imposto a pagar</button>
+            <button type="button" class="opt" data-value="Não">Não</button>
+          </div>
+        </div>
+
+        <div class="field" data-question="Possui experiência de crédito?">
+          <label class="field-label">Possui experiência de crédito?</label>
+          <div class="options" data-name="experienciaCredito">
+            <button type="button" class="opt" data-value="Sim">Sim</button>
+            <button type="button" class="opt" data-value="Não">Não</button>
+          </div>
+          <div class="conditional" id="experienciaCreditoExtra">
+            <input type="text" id="experienciaCreditoInfo" class="text-input" placeholder="Descreva a experiência de crédito">
+          </div>
+        </div>
+
+        <div class="field" data-question="Chave Pix vinculada?">
+          <label class="field-label">Possui chave pix vinculada ao telefone do cadastro?</label>
+          <div class="options" data-name="chavePix">
+            <button type="button" class="opt" data-value="Sim">Sim</button>
+            <button type="button" class="opt" data-value="Não">Não</button>
+          </div>
+          <div class="conditional" id="chavePixExtra">
+            <input type="text" id="chavePixBanco" class="text-input" placeholder="Nome do banco">
+          </div>
+        </div>
+
+        <div class="field field-text-group">
+          <label class="field-label">Checagem com a cliente</label>
+          <div class="text-row">
+            <input type="date" id="checagemData" class="text-input">
+            <input type="time" id="checagemHora" class="text-input">
+          </div>
+        </div>
+
+        <button type="button" id="clearBtn" class="clear-btn">Limpar tudo</button>
+
+      </form>
+    </section>
+
+    <!-- RESULT -->
+    <section class="panel result-panel">
+      <div class="result-header">
+        <h2 class="panel-title">Texto gerado</h2>
+        <button id="copyBtn" class="copy-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span id="copyLabel">Copiar texto</span>
+        </button>
+      </div>
+      <div id="output" class="output-box">
+        <span class="placeholder">Preencha os campos ao lado para gerar o texto do script mínimo.</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">Reanálise · Script Mínimo</footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
