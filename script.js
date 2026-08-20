@@ -122,7 +122,7 @@ clearBtn.addEventListener("click", () => {
   render();
 });
 
-const INTRO_TEXT = "Olá, tudo bem? Seguindo o formato de script mínimo, solicito reanálise conforme as informações a seguir:";
+const INTRO_TEXT = "Olá, tudo bem? Solicito reanálise conforme as informações a seguir:";
 
 function buildParts() {
   const parts = [];
