@@ -140,18 +140,30 @@
     </section>
 
     <!-- RESULT -->
-    <section class="panel result-panel">
-      <div class="result-header">
-        <h2 class="panel-title">Texto gerado</h2>
-        <button id="copyBtn" class="copy-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <span id="copyLabel">Copiar texto</span>
-        </button>
-      </div>
-      <div id="output" class="output-box">
-        <span class="placeholder">Preencha os campos ao lado para gerar o texto da checagem.</span>
-      </div>
-    </section>
+    <div class="side">
+      <section class="panel result-panel">
+        <div class="result-header">
+          <h2 class="panel-title">Texto gerado</h2>
+          <button id="copyBtn" class="copy-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span id="copyLabel">Copiar texto</span>
+          </button>
+        </div>
+        <div id="output" class="output-box">
+          <span class="placeholder">Preencha os campos ao lado para gerar o texto da checagem.</span>
+        </div>
+      </section>
+
+      <!-- IDENTIFICAÇÃO (fica salva no navegador) -->
+      <section class="panel gcm-panel">
+        <h2 class="panel-title">Identificação do GCM</h2>
+        <div class="text-row">
+          <input type="text" id="gcmNome" class="text-input" placeholder="Nome do GCM" autocomplete="off">
+          <input type="text" id="gcmFilial" class="text-input text-input-small" placeholder="Filial (ex.: SP1)" autocomplete="off">
+        </div>
+        <p class="hint">Fica salvo neste navegador e é usado na despedida do texto.</p>
+      </section>
+    </div>
 
   </main>
 
