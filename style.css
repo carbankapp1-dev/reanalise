@@ -81,6 +81,7 @@ html,body{
 
 @media (max-width: 860px){
   .layout{grid-template-columns:1fr;}
+  .side{position:static;}
 }
 
 .panel{
@@ -281,10 +282,31 @@ html,body{
   background:#fff6f6;
 }
 
-/* Result panel */
-.result-panel{
+/* Coluna da direita (texto gerado + identificação) */
+.side{
   position:sticky;
   top:24px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.gcm-panel{
+  padding:20px 24px 22px;
+}
+
+.gcm-panel .panel-title{
+  margin-bottom:14px;
+}
+
+.text-input-small{
+  flex:0 1 150px;
+}
+
+.hint{
+  margin:10px 0 0;
+  font-size:12px;
+  color:var(--ink-soft);
 }
 
 .result-header{
