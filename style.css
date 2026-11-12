@@ -202,6 +202,17 @@ html,body{
   border-color:var(--blue-deep);
 }
 
+/* Pergunta inativa (depende de outra resposta) */
+.field.is-disabled .field-label,
+.field.is-disabled .options{
+  opacity:0.4;
+}
+
+.field.is-disabled .opt{
+  pointer-events:none;
+  cursor:not-allowed;
+}
+
 /* Campos condicionais */
 .conditional{
   display:grid;

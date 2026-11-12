@@ -117,10 +117,27 @@ document.querySelectorAll(".options").forEach(group => {
       }
 
       updateConditional(name);
+      updateDependencies();
       render();
     });
   });
 });
+
+// Regras de dependência entre perguntas:
+// sem contrato no mercado ("Não"), a pergunta "Será quitado?" fica inativa e sem resposta
+function updateDependencies() {
+  const quitadoGroup = document.querySelector('.options[data-name="quitado"]');
+  const quitadoField = quitadoGroup.closest(".field");
+  const disable = state.contrato === "Não";
+
+  if (disable) {
+    state.quitado = null;
+    quitadoGroup.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
+  }
+
+  quitadoGroup.querySelectorAll(".opt").forEach(b => { b.disabled = disable; });
+  quitadoField.classList.toggle("is-disabled", disable);
+}
 
 // Mostra/oculta o campo condicional de um grupo, de acordo com a resposta selecionada
 function updateConditional(name) {
@@ -148,6 +165,7 @@ clearBtn.addEventListener("click", () => {
   document.querySelectorAll(".opt.selected").forEach(b => b.classList.remove("selected"));
   document.querySelectorAll(".conditional").forEach(c => c.classList.remove("open"));
   document.querySelectorAll(".conditional .text-input").forEach(i => i.value = "");
+  updateDependencies();
   render();
 });
 
