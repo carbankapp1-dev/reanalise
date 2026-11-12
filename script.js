@@ -220,15 +220,16 @@ function buildText() {
   let text = `${INTRO_TEXT}\n\n${parts.join("   ------   ")}`;
 
   const { data, hora } = getNowBR();
-  text += `\n\n------Checagem realizada com a cliente pelo número celular do cadastro, em ${data} as ${hora} hs.`;
+  let checagem = `------Checagem realizada com a cliente pelo número celular do cadastro, em ${data} as ${hora} hs.`;
 
-  // Despedida: "Checagem feita por GCM - Nome - Filial" (só aparece se houver nome ou filial)
+  // Mesma linha: " - GCM - Nome - Filial" (só aparece se houver nome ou filial)
   const nome = gcmNomeInput.value.trim();
   const filial = gcmFilialInput.value.trim();
   if (nome || filial) {
-    const assinatura = ["GCM", nome, filial].filter(Boolean).join(" - ");
-    text += `\n\nChecagem feita por ${assinatura}`;
+    checagem += ` - ${["GCM", nome, filial].filter(Boolean).join(" - ")}`;
   }
+
+  text += `\n\n${checagem}`;
 
   return text;
 }
