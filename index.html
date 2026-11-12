@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reanálise — Script Mínimo</title>
+<title>Reanálise — Checagem com o proponente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,14 +32,13 @@
       <img src="favicon-32x32.png" alt="" class="brand-mark" width="28" height="28">
       <span class="brand-name">Reanálise</span>
     </div>
-    <p class="subtitle">Monte o script mínimo de forma rápida e padronizada</p>
   </header>
 
   <main class="layout">
 
     <!-- FORM -->
     <section class="panel form-panel">
-      <h1 class="panel-title">Script Mínimo</h1>
+      <h1 class="panel-title">Checagem com o proponente</h1>
 
       <form id="form">
 
@@ -103,7 +102,7 @@
           </div>
         </div>
 
-        <div class="field" data-question="Declara IR?">
+        <div class="field" data-question="Declara IR?" hidden>
           <label class="field-label">Declara IR?</label>
           <div class="options" data-name="declaraIR">
             <button type="button" class="opt" data-value="Sim">Sim</button>
@@ -113,7 +112,7 @@
           </div>
         </div>
 
-        <div class="field" data-question="Possui experiência de crédito?">
+        <div class="field" data-question="Possui experiência de crédito?" hidden>
           <label class="field-label">Possui experiência de crédito?</label>
           <div class="options" data-name="experienciaCredito">
             <button type="button" class="opt" data-value="Sim">Sim</button>
@@ -124,7 +123,7 @@
           </div>
         </div>
 
-        <div class="field" data-question="Chave Pix vinculada?">
+        <div class="field" data-question="Chave Pix vinculada?" hidden>
           <label class="field-label">Possui chave pix vinculada ao telefone do cadastro?</label>
           <div class="options" data-name="chavePix">
             <button type="button" class="opt" data-value="Sim">Sim</button>
@@ -132,14 +131,6 @@
           </div>
           <div class="conditional" id="chavePixExtra">
             <input type="text" id="chavePixBanco" class="text-input" placeholder="Nome do banco">
-          </div>
-        </div>
-
-        <div class="field field-text-group">
-          <label class="field-label">Checagem com a cliente</label>
-          <div class="text-row">
-            <input type="date" id="checagemData" class="text-input">
-            <input type="time" id="checagemHora" class="text-input">
           </div>
         </div>
 
@@ -158,13 +149,13 @@
         </button>
       </div>
       <div id="output" class="output-box">
-        <span class="placeholder">Preencha os campos ao lado para gerar o texto do script mínimo.</span>
+        <span class="placeholder">Preencha os campos ao lado para gerar o texto da checagem.</span>
       </div>
     </section>
 
   </main>
 
-  <footer class="footer">Reanálise · Script Mínimo</footer>
+  <footer class="footer">Reanálise · Checagem com o proponente</footer>
 
 </div>
 
