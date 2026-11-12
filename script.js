@@ -65,6 +65,41 @@ const outputBox = document.getElementById("output");
 const copyBtn = document.getElementById("copyBtn");
 const copyLabel = document.getElementById("copyLabel");
 const clearBtn = document.getElementById("clearBtn");
+const gcmNomeInput = document.getElementById("gcmNome");
+const gcmFilialInput = document.getElementById("gcmFilial");
+
+// Nome do GCM e filial ficam salvos no navegador (localStorage)
+const GCM_STORAGE_KEY = "reanalise_gcm";
+
+function loadGcm() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(GCM_STORAGE_KEY) || "{}");
+    gcmNomeInput.value = saved.nome || "";
+    gcmFilialInput.value = saved.filial || "";
+  } catch (err) {
+    // sem acesso ao armazenamento: segue sem preencher
+  }
+}
+
+function saveGcm() {
+  try {
+    localStorage.setItem(GCM_STORAGE_KEY, JSON.stringify({
+      nome: gcmNomeInput.value.trim(),
+      filial: gcmFilialInput.value.trim()
+    }));
+  } catch (err) {
+    // sem acesso ao armazenamento: o texto continua funcionando, só não salva
+  }
+}
+
+[gcmNomeInput, gcmFilialInput].forEach(input => {
+  input.addEventListener("input", () => {
+    saveGcm();
+    render();
+  });
+});
+
+loadGcm();
 
 // Seleção das opções (toggle único por grupo)
 document.querySelectorAll(".options").forEach(group => {
@@ -168,6 +203,14 @@ function buildText() {
 
   const { data, hora } = getNowBR();
   text += `\n\n------Checagem realizada com a cliente pelo número celular do cadastro, em ${data} as ${hora} hs.`;
+
+  // Despedida: "Checagem feita por GCM - Nome - Filial" (só aparece se houver nome ou filial)
+  const nome = gcmNomeInput.value.trim();
+  const filial = gcmFilialInput.value.trim();
+  if (nome || filial) {
+    const assinatura = ["GCM", nome, filial].filter(Boolean).join(" - ");
+    text += `\n\nChecagem feita por ${assinatura}`;
+  }
 
   return text;
 }
