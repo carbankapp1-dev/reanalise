@@ -4,9 +4,10 @@ const FIELD_ORDER = [
   { name: "quitado",      question: "Será quitado?" },
   { name: "entrada",      question: "Composição da entrada?" },
   { name: "renda",        question: "Composição da renda?" },
-  { name: "estadoCivil",  question: "Estado Civil?" },
-  { name: "declaraIR",    question: "Declara IR?" },
-  { name: "experienciaCredito", question: "Possui experiência de crédito?" }
+  { name: "estadoCivil",  question: "Estado Civil?" }
+  // Campos inativos (ocultos no HTML e fora do texto gerado):
+  // { name: "declaraIR",    question: "Declara IR?" },
+  // { name: "experienciaCredito", question: "Possui experiência de crédito?" }
 ];
 
 // Configuração dos campos condicionais (abrem um input extra quando alguma das respostas-gatilho é escolhida)
@@ -63,8 +64,6 @@ const state = {
 const outputBox = document.getElementById("output");
 const copyBtn = document.getElementById("copyBtn");
 const copyLabel = document.getElementById("copyLabel");
-const checagemDataInput = document.getElementById("checagemData");
-const checagemHoraInput = document.getElementById("checagemHora");
 const clearBtn = document.getElementById("clearBtn");
 
 // Seleção das opções (toggle único por grupo)
@@ -109,16 +108,11 @@ Object.values(CONDITIONALS).forEach(config => {
   document.getElementById(config.inputId).addEventListener("input", render);
 });
 
-checagemDataInput.addEventListener("input", render);
-checagemHoraInput.addEventListener("input", render);
-
 clearBtn.addEventListener("click", () => {
   Object.keys(state).forEach(k => state[k] = null);
   document.querySelectorAll(".opt.selected").forEach(b => b.classList.remove("selected"));
   document.querySelectorAll(".conditional").forEach(c => c.classList.remove("open"));
   document.querySelectorAll(".conditional .text-input").forEach(i => i.value = "");
-  checagemDataInput.value = "";
-  checagemHoraInput.value = "";
   render();
 });
 
@@ -143,22 +137,27 @@ function buildParts() {
     parts.push(line);
   });
 
-  // Chave Pix tem formato de frase próprio (não segue o padrão "pergunta resposta")
-  if (state.chavePix === "Sim") {
-    const banco = document.getElementById("chavePixBanco").value.trim();
-    let pixLine = "Possui chave pix vinculado no fone do cadastro";
-    pixLine += banco ? ` - Banco: ${banco}` : " - Banco";
-    parts.push(pixLine);
-  }
-  // Quando "Não", nada é adicionado (fica em branco, conforme solicitado)
+  // Chave Pix: campo inativo (oculto no HTML e fora do texto gerado)
 
   return parts;
 }
 
-function formatDateBR(isoDate) {
-  if (!isoDate) return "";
-  const [year, month, day] = isoDate.split("-");
-  return `${day}/${month}/${year}`;
+// Data e hora atuais (fuso de Brasília), no momento em que o texto é gerado
+function getNowBR() {
+  const now = new Date();
+  const data = now.toLocaleDateString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+  const hora = now.toLocaleTimeString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+  return { data, hora };
 }
 
 function buildText() {
@@ -167,11 +166,8 @@ function buildText() {
 
   let text = `${INTRO_TEXT}\n\n${parts.join("   ------   ")}`;
 
-  const data = checagemDataInput.value;
-  const hora = checagemHoraInput.value;
-  if (data && hora) {
-    text += `\n\n------Checagem realizada com a cliente pelo número celular do cadastro, em ${formatDateBR(data)} as ${hora} hs.`;
-  }
+  const { data, hora } = getNowBR();
+  text += `\n\n------Checagem realizada com a cliente pelo número celular do cadastro, em ${data} as ${hora} hs.`;
 
   return text;
 }
@@ -180,7 +176,7 @@ function render() {
   const text = buildText();
 
   if (!text) {
-    outputBox.innerHTML = `<span class="placeholder">Preencha os campos ao lado para gerar o texto do script mínimo.</span>`;
+    outputBox.innerHTML = `<span class="placeholder">Preencha os campos ao lado para gerar o texto da checagem.</span>`;
     return;
   }
 
@@ -194,8 +190,10 @@ function resetCopyState() {
 }
 
 copyBtn.addEventListener("click", async () => {
+  // Gera o texto de novo para a data/hora refletir o momento da cópia
   const text = buildText();
   if (!text) return;
+  outputBox.textContent = text;
 
   try {
     await navigator.clipboard.writeText(text);
